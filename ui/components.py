@@ -3,10 +3,12 @@ Composants d'interface utilisateur réutilisables.
 """
 import streamlit as st
 from typing import Dict, Any
+from datetime import datetime
 
 from config.constants import (
     Gender, Country, Category, BinaryChoice, VALIDATION_RANGES
 )
+from utils.export import PDFExporter, CSVExporter
 
 
 class InputComponents:
@@ -161,6 +163,20 @@ class DisplayComponents:
                 f"({result.formatted_probability}). Il s'agit d'un client fidèle "
                 f"avec un risque {result.risk_level.lower()}."
             )
+        
+        # Boutons d'export
+        st.markdown("---")
+        st.markdown("### 📥 Export des Résultats")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("📄 Générer Rapport PDF", use_container_width=True):
+                DisplayComponents._generate_pdf_report(result, customer_data)
+        
+        with col2:
+            if st.button("📊 Exporter CSV", use_container_width=True):
+                DisplayComponents._generate_csv_export(result, customer_data)
     
     @staticmethod
     def render_customer_summary(customer_data):
@@ -202,3 +218,57 @@ class DisplayComponents:
                 st.error(f"• {error}")
             return True
         return False
+    
+    @staticmethod
+    def _generate_pdf_report(result, customer_data):
+        """Génère et propose le téléchargement du rapport PDF."""
+        try:
+            with st.spinner("Génération du rapport PDF..."):
+                exporter = PDFExporter()
+                pdf_bytes = exporter.generate_report(customer_data, result)
+                
+                if pdf_bytes:
+                    # Nom du fichier avec timestamp
+                    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    filename = f"rapport_churn_{timestamp}.pdf"
+                    
+                    # Téléchargement
+                    st.download_button(
+                        label="📥 Télécharger le Rapport PDF",
+                        data=pdf_bytes,
+                        file_name=filename,
+                        mime="application/pdf",
+                        use_container_width=True
+                    )
+                    
+                    st.success("✅ Rapport PDF généré avec succès !")
+                else:
+                    st.error("❌ Impossible de générer le rapport PDF.")
+        
+        except Exception as e:
+            st.error(f"❌ Erreur lors de la génération du PDF : {e}")
+    
+    @staticmethod
+    def _generate_csv_export(result, customer_data):
+        """Génère et propose le téléchargement du fichier CSV."""
+        try:
+            with st.spinner("Génération du fichier CSV..."):
+                csv_content = CSVExporter.export_prediction_data(customer_data, result)
+                
+                # Nom du fichier avec timestamp
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename = f"prediction_churn_{timestamp}.csv"
+                
+                # Téléchargement
+                st.download_button(
+                    label="📥 Télécharger les Données CSV",
+                    data=csv_content,
+                    file_name=filename,
+                    mime="text/csv",
+                    use_container_width=True
+                )
+                
+                st.success("✅ Fichier CSV généré avec succès !")
+        
+        except Exception as e:
+            st.error(f"❌ Erreur lors de la génération du CSV : {e}")

@@ -4,11 +4,31 @@ Cette application Streamlit permet de prédire si un client bancaire est suscept
 
 ## 🚀 Fonctionnalités
 
+### 🎯 **Prédiction Individuelle**
 - **Interface intuitive** avec validation des données en temps réel
 - **Prédiction de churn** avec probabilité et niveau de risque
-- **Affichage détaillé** du profil client et des résultats
-- **Gestion d'erreurs robuste** avec logging
+- **Dashboard analytics** avec graphiques interactifs
+- **Profil client radar** et comparaisons
+- **Recommandations d'actions** personnalisées
+
+### 📊 **Traitement par Lots**
+- **Upload CSV** pour prédictions multiples
+- **Template téléchargeable** avec exemples
+- **Validation automatique** des données
+- **Analyse par segments** (pays, catégorie)
+- **Export des résultats** en CSV
+
+### 📥 **Export et Rapports**
+- **Génération PDF** de rapports complets
+- **Export CSV** des données et prédictions
+- **Graphiques et visualisations** intégrés
+- **Métriques de performance** du modèle
+
+### 🛡️ **Robustesse**
+- **Gestion d'erreurs complète** avec logging
+- **Validation multi-niveaux** des données
 - **Architecture modulaire** respectant les principes du clean code
+- **Interface responsive** et moderne
 
 ## 📁 Structure du Projet
 
@@ -57,10 +77,26 @@ L'application sera accessible à l'adresse : `http://localhost:8501`
 
 ## 📋 Utilisation
 
+### 🎯 **Mode Prédiction Individuelle**
 1. **Remplir le formulaire** avec les informations du client
 2. **Cliquer sur "Prédire le Churn"** pour lancer l'analyse
-3. **Consulter le résultat** avec la probabilité et le niveau de risque
-4. **Examiner les recommandations** d'actions à entreprendre
+3. **Consulter les résultats** dans les onglets Analytics, Profil, Comparaison
+4. **Télécharger les rapports** PDF ou CSV
+5. **Examiner les recommandations** d'actions à entreprendre
+
+### 📊 **Mode Traitement par Lots**
+1. **Télécharger le modèle CSV** depuis l'application
+2. **Remplir le fichier** avec vos données clients
+3. **Uploader le fichier** dans l'interface
+4. **Lancer les prédictions** en masse
+5. **Analyser les résultats** par segments
+6. **Exporter les résultats** pour utilisation externe
+
+### 📈 **Mode Analytics**
+1. **Consulter les métriques** globales de la base clients
+2. **Analyser les tendances** de churn
+3. **Identifier les segments** à risque
+4. **Suivre l'évolution** des indicateurs
 
 ## 🔧 Variables d'Entrée
 
@@ -108,16 +144,35 @@ L'application sera accessible à l'adresse : `http://localhost:8501`
 - Monitoring des erreurs
 - Debugging facilité
 
-## 🔮 Améliorations Futures
+## ✅ Fonctionnalités Implémentées (Phase 1)
 
-- [ ] Interface multi-pages
-- [ ] Export des résultats (PDF/CSV)
-- [ ] Analyse par lots (upload fichier)
-- [ ] Métriques du modèle
-- [ ] Explainability (SHAP values)
-- [ ] API REST
-- [ ] Base de données
-- [ ] Authentification utilisateurs
+- [x] **Dashboard de métriques** avec visualisations interactives
+- [x] **Export PDF** des rapports complets 
+- [x] **Traitement par lots** via upload CSV
+- [x] **Importance des features** et analytics avancés
+- [x] **Interface multi-onglets** moderne
+- [x] **Validation robuste** des données
+- [x] **Gestion d'erreurs** complète
+
+## 🔮 Améliorations Futures (Phases 2-4)
+
+### 🥈 **Phase 2 - Court Terme**
+- [ ] Base de données pour historique des prédictions
+- [ ] SHAP values pour explainability détaillée  
+- [ ] API REST pour intégrations externes
+- [ ] Authentification et gestion des utilisateurs
+
+### 🥉 **Phase 3 - Moyen Terme**
+- [ ] Comparaison de modèles (XGBoost, LightGBM)
+- [ ] Alertes automatiques en temps réel
+- [ ] Clustering automatique des clients
+- [ ] Interface mobile responsive
+
+### 🏆 **Phase 4 - Long Terme**
+- [ ] MLOps complet avec retraining automatique
+- [ ] Recommandations IA intelligentes
+- [ ] Intégrations CRM (Salesforce, HubSpot)
+- [ ] Monitoring de la dérive des données
 
 ## 🐛 Résolution de Problèmes
 
